@@ -24,7 +24,11 @@ export const TitleContainer = styled.div`
   padding: 0 20px;
 `;
 
-export const DoneContainer = styled.div`
+interface DivProps{
+  done?:boolean;
+}
+
+export const DoneContainer = styled.div<DivProps>`
   align-items: center;
   border: 1px solid #ddd;
   display: flex;

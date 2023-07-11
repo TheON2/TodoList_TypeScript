@@ -35,8 +35,10 @@ const Main = () => {
   }
 
   if (isError) {
-    return <p>오류가 발생하였습니다...!</p>;
+    navigate("/Login");
   }
+
+  //유저 토큰이 있을때만 투두스를 가져오게 해야함
 
   return (
     <div id='root'>

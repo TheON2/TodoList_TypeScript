@@ -1,24 +1,35 @@
 import {ProfileContainer, ProfilePicture, UserName} from "./style";
 import {useNavigate} from "react-router-dom";
-import useMutate from "../../hooks/useMutate";
 import {userLogOut} from "../../api/user";
 import { logOutUser} from "../../redux/reducers/userSlice";
-import {useCallback, useEffect} from "react";
+import {useCallback} from "react";
 import CustomButton from "../CustomButton/CustomButton";
-import { useSelector} from "react-redux";
+import { useDispatch, useSelector} from "react-redux";
+import { RootState } from './../../type/local';
+import { useMutation, useQueryClient } from "react-query";
 
-const Profile =({nickName,wokringCount,doneCount})=>{
-  const navigate = useNavigate();
-  const { imageUrl,profileContent } = useSelector(state=>state.user.user)
-  const logOut_mutate= useMutate(userLogOut,'user',logOutUser)
-  const onLogOut = useCallback(()=>{
-    logOut_mutate.mutate()
-  },[])
-  useEffect(() => {
-    if (logOut_mutate.isSuccess) {
+interface ProfileProps{
+  nickName:string|null,
+  wokringCount:number,
+  doneCount:number
+}
+
+const Profile =({nickName,wokringCount,doneCount}:ProfileProps)=>{
+  const dispatch = useDispatch();
+  const queryClient = useQueryClient();
+  const {mutate:logOut_mutate} = useMutation(userLogOut, {
+    onSuccess: () => {
+      queryClient.invalidateQueries('user');
+      dispatch(logOutUser())
       navigate("/Login");
-    }
-  }, [logOut_mutate.isSuccess, navigate]);
+    },
+  });
+  const navigate = useNavigate();
+  const { imageUrl,profileContent } = useSelector((state:RootState)=>state.user.user)
+  const onLogOut = useCallback(()=>{
+    logOut_mutate()
+  },[logOut_mutate])
+
   return(<div>
     <ProfileContainer className="profile block">
       <ProfilePicture >

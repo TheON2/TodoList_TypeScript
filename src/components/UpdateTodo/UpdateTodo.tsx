@@ -7,7 +7,6 @@ import {TextArea} from "./style";
 import {Container2, DoneContainer,ButtonContainer,TitleContainer} from "../ReadTodo/style";
 import {useDispatch, useSelector} from "react-redux";
 import {changeContent} from "../../redux/reducers/todosSlice";
-import {v4 as uuidv4} from "uuid";
 import { RootState } from './../../type/local';
 
 const UpdateTodo = ({toggleUpdate}) => {

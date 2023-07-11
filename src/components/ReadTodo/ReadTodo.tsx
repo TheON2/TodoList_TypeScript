@@ -1,8 +1,14 @@
 import React from "react";
 import CustomButton from "../CustomButton/CustomButton";
 import {ButtonContainer, Container2, DoneContainer, TitleContainer} from "./style";
+import { Todo } from "../../redux/reducers/todosSlice";
 
-const ReadTodo = ({todo,toggleUpdate}) =>{
+interface ReadTodoProps{
+  todo:Todo|null,
+  toggleUpdate:()=>void,
+}
+
+const ReadTodo = ({todo,toggleUpdate}:ReadTodoProps) =>{
   return(
     <>
         <TitleContainer>
