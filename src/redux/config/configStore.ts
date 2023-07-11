@@ -1,9 +1,10 @@
 import {combineReducers, configureStore} from "@reduxjs/toolkit";
-import user from "../reducers/userSlice";
-import todos from "../reducers/todosSlice";
+import userReducer from "../reducers/userSlice";
+import todosReducer from "../reducers/todosSlice";
 
 const rootReducer = combineReducers({
-  user,todos
+  user: userReducer,
+  todos: todosReducer
 });
 
 // 2. create store
@@ -12,5 +13,6 @@ const store = configureStore({
   devTools: import.meta.env.NODE_ENV !== 'production',
 });
 
+export type RootState = ReturnType<typeof rootReducer>;
 // 3. export
 export default store;
