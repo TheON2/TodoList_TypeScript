@@ -4,7 +4,7 @@ import {unauthUser} from "../redux/reducers/userSlice";
 import store from "../redux/config/configStore";
 
 const instance = axios.create({
-  baseURL: process.env.REACT_APP_LOCAL_SERVER,
+  baseURL: import.meta.env.VITE_APP_LOCAL_SERVER,
   withCredentials: true,
 });
 
@@ -41,7 +41,7 @@ instance.interceptors.response.use((response) => {
     console.log('액세스토큰이 유효하지 않습니다.')
     originalRequest._retry = true;
     try {
-      const { data } = await instance.get(`${process.env.REACT_APP_LOCAL_SERVER}/refreshToken`);
+      const { data } = await instance.get(`${import.meta.env.VITE_APP_LOCAL_SERVER}/refreshToken`);
       localStorage.setItem('token', data.token);
       originalRequest.headers['Authorization'] = 'Bearer ' + data.token;
       return instance(originalRequest);

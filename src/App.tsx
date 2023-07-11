@@ -9,18 +9,18 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 const queryClient = new QueryClient();
 
 const App = () => {
-    return (
-        <QueryClientProvider client={queryClient}>
-            <BrowserRouter>
-                <Routes>
-                    <Route path='/Login' element=<Login/>/>
-                    <Route path='/' element=<Main/>/>
-                    <Route path='/:id' element=<Detail/>/>
-                    <Route path='/SignUp' element=<SignUp/>/>
-                </Routes>
-            </BrowserRouter>
-        </QueryClientProvider>
-    );
+  return (
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
+        <Routes>
+          <Route path='/Login' element={<Login/>}/>
+          <Route path='/' element={<Main/>}/>
+          <Route path='/:id' element={<Detail/>}/>
+          <Route path='/SignUp' element={<SignUp/>}/>
+        </Routes>
+      </BrowserRouter>
+    </QueryClientProvider>
+  );
 };
 
 export default App;

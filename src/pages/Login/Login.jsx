@@ -87,9 +87,9 @@ const Login=()=>{
             <h1>The TodoList</h1>
             <div>
               <SocialContainer>
-                <a href={`${process.env.REACT_APP_LOCAL_SERVER}/user/naver`} className="social"><SiNaver size={'2em'} /></a>
-                <a href={`${process.env.REACT_APP_LOCAL_SERVER}/user/google`} className="social"><FaGoogle size={'2em'} /></a>
-                <a href={`${process.env.REACT_APP_LOCAL_SERVER}/user/kakao`} className="social"><RiKakaoTalkFill size={'2em'} color={'black'}/></a>
+                <a href={`${import.meta.env.VITE_APP_LOCAL_SERVER}/user/naver`} className="social"><SiNaver size={'2em'} /></a>
+                <a href={`${import.meta.env.VITE_APP_LOCAL_SERVER}/user/google`} className="social"><FaGoogle size={'2em'} /></a>
+                <a href={`${import.meta.env.VITE_APP_LOCAL_SERVER}/user/kakao`} className="social"><RiKakaoTalkFill size={'2em'} color={'black'}/></a>
               </SocialContainer>
             </div>
             <span>or use your account</span>
