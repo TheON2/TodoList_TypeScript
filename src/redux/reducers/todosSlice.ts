@@ -1,4 +1,4 @@
-import {createSlice} from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
 
 export interface Todo {
   _id: string;
@@ -88,7 +88,7 @@ const todosSlice = createSlice({
       state.todos = action.payload.todos
       state.page = action.payload.pageNum
     },
-    resetTodos: (state:TodosState, action) => {
+    resetTodos: (state:TodosState) => {
       state.todos = []
       state.hasMoreTodos=true
       state.viewMode=1
@@ -113,23 +113,23 @@ const todosSlice = createSlice({
         );
       }
     },
-    trueHaveNew: (state:TodosState, action) => {
+    trueHaveNew: (state:TodosState) => {
       state.haveNew = true
     },
-    falseHaveNew: (state:TodosState, action) => {
+    falseHaveNew: (state:TodosState) => {
       state.haveNew = false
     },
-    trueLoading: (state:TodosState, action) => {
+    trueLoading: (state:TodosState) => {
       state.Loading = true
     },
-    falseLoading: (state:TodosState, action) => {
+    falseLoading: (state:TodosState) => {
       state.Loading = false
     },
     trueModal: (state:TodosState, action) => {
       state.modalOn = true
       state.todo = action.payload
     },
-    falseModal: (state:TodosState, action) => {
+    falseModal: (state:TodosState) => {
       state.modalOn = false
       state.todo = null
     },

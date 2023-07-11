@@ -1,50 +1,68 @@
 import api from "../axios/api";
+import {UserResponse} from "../redux/reducers/userSlice";
 
-//user
-const addUser = async (newUser) => {
+interface User {
+  email:string|null,
+  nickName:string|null,
+  imageUrl:string|null,
+  profileContent:string|null,
+  profileUrl:string|null
+}
+
+interface NewUser{
+  email:string,
+  password:string,
+  nickName:string
+}
+
+interface LoginUser{
+  email:string,
+  password:string,
+}
+
+const addUser = async (newUser: NewUser): Promise<void> => {
   await api.post(`/user`, newUser);
 };
 
-const getUser = async (userEmail) => {
+const getUser = async (userEmail: string): Promise<UserResponse> => {
   const response = await api.get(`/user/${userEmail}`);
   return response.data;
 };
 
-const getUsers = async () => {
+const getUsers = async (): Promise<User[]> => {
   const response = await api.get(`/user`);
   return response.data;
 };
 
-const getAuthToken = async () => {
+const getAuthToken = async (): Promise<string> => {
   const response = await api.get(`/usertoken`);
   return response.data;
 };
 
-const profileChange = async (data) => {
-  const response = await api.post(`/user/images`, data);
-  return response.data;
-};
-
-const getProfileImage = async () => {
-  const response = await api.get(`/user/image`);
-  return response.data;
-};
-
-const userLogin = async (loginUser) => {
+const userLogin = async (loginUser: LoginUser): Promise<UserResponse> => {
   const response = await api.post(`/user/login`, loginUser);
   return response.data;
 };
 
-const userLogOut = async () => {
+const userLogOut = async (): Promise<void> => {
   await api.post(`/user/logout`);
 };
 
-const updateUser = async (sendData) => {
-  await api.patch(`/user/${sendData.email}/nickname`, {nickname: sendData.nickname});
+const updateUser = async (sendData: { email: string; nickname: string }): Promise<void> => {
+  await api.patch(`/user/${sendData.email}/nickname`, { nickname: sendData.nickname });
 };
 
-const deleteUser = async (userEmail) => {
+const deleteUser = async (userEmail: string): Promise<void> => {
   await api.delete(`/user/${userEmail}`);
 };
 
-export {addUser,getUser,profileChange, getUsers,getAuthToken, updateUser, deleteUser, userLogin, userLogOut};
+export {
+  addUser,
+  getUser,
+  getUsers,
+  getAuthToken,
+  updateUser,
+  deleteUser,
+  userLogin,
+  userLogOut,
+};

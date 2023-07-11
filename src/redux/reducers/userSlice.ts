@@ -2,7 +2,7 @@ import {createSlice, PayloadAction} from '@reduxjs/toolkit'
 
 export interface UserState {
   user:{
-    email:string|null,
+    email: string | null;
     nickName:string|null,
     isLogged:boolean,
     token:string|null|undefined,
@@ -14,7 +14,7 @@ export interface UserState {
   }
 }
 
-interface UserResponse {
+export interface UserResponse {
   userResponse: Omit<UserState['user'], 'isLogged'|'token'> & {profileUrl : string },
   token:string,
 }
@@ -46,33 +46,33 @@ const userSlice = createSlice({
       localStorage.setItem('token', action.payload.token);
       state.user.isLogged=true
     },
-    authUser: (state:UserState, action) => {
+    authUser: (state:UserState, action:PayloadAction<UserResponse>) => {
       state.user.email=action.payload.userResponse.email
       state.user.nickName=action.payload.userResponse.nickName
       state.user.profileContent=action.payload.userResponse.profileContent
       state.user.imageUrl=action.payload.userResponse.profileUrl
       state.user.isLogged=true
     },
-    getProfileImage: (state:UserState, action) => {
+    getProfileImage: (state:UserState, action:PayloadAction<string>) => {
       state.user.imageUrl=action.payload
     },
-    unauthUser: (state:UserState, action) => {
+    unauthUser: (state:UserState) => {
       state.user.email=null
       state.user.isLogged=false
       state.user.profileContent=null
       state.user.imageUrl=null
       state.user.nickName=null
       state.user.token=undefined
-      localStorage.removeItem('token');
+      localStorage.removeItem("token");
     },
-    logOutUser: (state:UserState, action) => {
+    logOutUser: (state:UserState) => {
       state.user.email=null
       state.user.token=null
       state.user.isLogged=false
       state.user.profileContent=null
       state.user.imageUrl=null
       state.user.nickName=null
-      localStorage.removeItem('token');
+      localStorage.removeItem("token");
     },
   },
 })

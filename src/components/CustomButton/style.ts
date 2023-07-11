@@ -1,6 +1,11 @@
 import styled from 'styled-components';
 
-export const Button = styled.button`
+interface ButtonProps {
+  size?: string|null;
+  theme?: string|null;
+}
+
+export const Button = styled.button<ButtonProps>`
   display: inline-block;
   font-size: 1em;
   margin: 0.5em;

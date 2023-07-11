@@ -1,8 +1,11 @@
 import styled, {createGlobalStyle} from "styled-components";
 import Modal from 'react-modal';
-import {Link as OriginalLink} from "react-router-dom";
 
-export const StyledModal = styled(Modal)`
+interface ModalProps{
+  size?:string;
+}
+
+export const StyledModal = styled(Modal)<ModalProps>`
   width: ${({ size }) => (size === 'large' ? '70%' : '50%')};
   height: ${({ size }) => (size === 'large' ? '70%' : '50%')};
 `;
@@ -71,15 +74,15 @@ export const Container = styled.div`
   0 10px 10px rgba(0,0,0,0.22);
   position: relative;
   overflow: hidden;
-  width: 768px;
   max-width: 100%;
   height: 100%;
+  display: grid;
+  grid-template-columns: 18% 1fr;
+  grid-template-rows: 15% 10% 60% 15%;
+  align-content: center;
 `;
 
 export const Linker = styled.a`
-  display: grid;
-  grid-column: 1/3;
-  grid-row: 1/2;
   alignItems: center;
   gap:10px;
   text-decoration: none;
@@ -105,7 +108,11 @@ export const TitleContainer = styled.div`
   padding: 0 20px;
 `;
 
-export const DoneContainer = styled.div`
+interface DivProps{
+  done?:boolean
+}
+
+export const DoneContainer = styled.div<DivProps>`
   align-items: center;
   border: 1px solid #ddd;
   display: flex;

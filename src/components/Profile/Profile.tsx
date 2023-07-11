@@ -1,15 +1,11 @@
-import {ProfileContainer, ProfileOptions, ProfilePicture, UserName} from "./style";
+import {ProfileContainer, ProfilePicture, UserName} from "./style";
 import {useNavigate} from "react-router-dom";
 import useMutate from "../../hooks/useMutate";
-import {profileChange, userLogOut} from "../../api/user";
-import {getProfileImage, logOutUser} from "../../redux/reducers/userSlice";
-import {useCallback, useEffect, useRef, useState} from "react";
-import {Button} from "../../layout/Header/style";
+import {userLogOut} from "../../api/user";
+import { logOutUser} from "../../redux/reducers/userSlice";
+import {useCallback, useEffect} from "react";
 import CustomButton from "../CustomButton/CustomButton";
-import {useDispatch, useSelector} from "react-redux";
-import {useMutation, useQueryClient} from "react-query";
-import {getTodosDone} from "../../api/todos";
-import {loadTodosDone} from "../../redux/reducers/todosSlice";
+import { useSelector} from "react-redux";
 
 const Profile =({nickName,wokringCount,doneCount})=>{
   const navigate = useNavigate();

@@ -1,5 +1,4 @@
 import useInput from "../../hooks/useInput";
-import useMutate from "../../hooks/useMutate";
 import {addUser} from "../../api/user";
 import {
   Button,
@@ -9,50 +8,54 @@ import {
   Input, SignUpButton, SignUpContainer,
   SocialContainer
 } from "./style";
-import React, {useCallback, useEffect} from "react";
+import React, {FormEvent, useCallback, useEffect} from "react";
 import {useNavigate} from "react-router-dom";
-import {FaFacebookF, FaGoogle} from "react-icons/fa6";
+import { FaGoogle} from "react-icons/fa6";
 import {RiKakaoTalkFill} from "react-icons/ri";
 import {SiNaver} from "react-icons/si";
+import { useMutation, useQueryClient } from "react-query";
+import { AxiosError } from "axios";
 
 const SignUp =()=> {
   const [email, onChangeEmail] = useInput('');
   const [nickName, onChangeNickname] = useInput('');
   const [password, onChangePassword] = useInput('');
   const [confirmPassword, onChangeConfirmPassword] = useInput('');
-  const [confirMessage, onChangeConfirmMessage, setComfirmMessage] = useInput('');
-  const [signUp, onSignUp,setSignUp] = useInput(false);
-  const addUser_mutate = useMutate(addUser,'user');
+  const [confirMessage, , setComfirmMessage] = useInput('');
+  const [signUp, ,setSignUp] = useInput(false);
+  const queryClient = useQueryClient();
+  const {mutate:addUser_mutate ,isSuccess} = useMutation(addUser, {
+    onSuccess: () => {
+      queryClient.invalidateQueries('user');
+    },
+    onError: (error:AxiosError) =>{
+      setComfirmMessage(String(error?.response?.data));
+    }
+  });
   const navigate = useNavigate();
 
   const checkLogin =useCallback(()=>{
     const pattern = /^[^@]+@[^@]+$/;
-    if(pattern.test(email)&&password.length>=1&&confirmPassword.length>=1&&nickName.length>=1) setSignUp(true)
+    if(pattern.test(typeof email === "string" ? email :'')&&password.length>=1&&confirmPassword.length>=1&&nickName.length>=1) setSignUp(true)
     else setSignUp(false)
-  },[email,password,confirmPassword,nickName,signUp]);
+  },[email,password,confirmPassword,nickName,setSignUp]);
 
   const goLogin = () =>{
     navigate("/Login");
   }
 
   useEffect(() => {
-    if (addUser_mutate.isSuccess) {
+    if (isSuccess) {
       navigate("/");
     }
-  }, [addUser_mutate.isSuccess, navigate]);
+  }, [isSuccess, navigate]);
 
   useEffect(() => {
-    setComfirmMessage('')
+    setComfirmMessage("");
     checkLogin()
-  }, [email,nickName,password,confirmPassword]);
+  }, [email,nickName,password,confirmPassword,setComfirmMessage,checkLogin]);
 
-  useEffect(() => {
-    if (addUser_mutate.isError) {
-      setComfirmMessage(addUser_mutate.error.response.data);
-    }
-  }, [addUser_mutate.isError, addUser_mutate.error]);
-
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if(!signUp) return
     if(password !== confirmPassword) {
@@ -64,7 +67,7 @@ const SignUp =()=> {
       password,
       nickName,
     };
-    addUser_mutate.mutate(newUser)
+    addUser_mutate(newUser)
     console.log(`Email: ${email}, Password: ${password}`);
   };
 

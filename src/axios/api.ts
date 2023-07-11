@@ -1,5 +1,4 @@
 import axios from "axios";
-import {useDispatch} from "react-redux";
 import {unauthUser} from "../redux/reducers/userSlice";
 import store from "../redux/config/configStore";
 

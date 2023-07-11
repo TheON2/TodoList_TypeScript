@@ -1,6 +1,11 @@
 import {Container, Linker, Logo, Logo2, ProfilePicture, ProfilePicture2} from "./style";
 
-const Header = ({title, stack}) =>{
+interface HeaderProps{
+  title:string|null;
+  stack:string|null;
+}
+
+const Header = ({title, stack}:HeaderProps) =>{
   return (
     <Container>
       <Linker href='/'>

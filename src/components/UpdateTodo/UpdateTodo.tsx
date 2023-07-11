@@ -8,11 +8,12 @@ import {Container2, DoneContainer,ButtonContainer,TitleContainer} from "../ReadT
 import {useDispatch, useSelector} from "react-redux";
 import {changeContent} from "../../redux/reducers/todosSlice";
 import {v4 as uuidv4} from "uuid";
+import { RootState } from './../../type/local';
 
 const UpdateTodo = ({toggleUpdate}) => {
   const mutation_updateTodo= useMutate(updateTodo,'todos')
   const [content,onChangeContent,setContent] = useInput('')
-  const {todo} = useSelector(state=>state.todos)
+  const {todo} = useSelector((state:RootState)=>state.todos)
   const dispatch =useDispatch()
   const update_Todo=useCallback(()=>{
     const sendData ={id:todo.id,content}
@@ -25,11 +26,11 @@ const UpdateTodo = ({toggleUpdate}) => {
       id:todo.id,
     };
     dispatch(changeContent(newTodo))
-  },[todo,mutation_updateTodo,content,setContent])
+  },[todo,mutation_updateTodo,content,dispatch,toggleUpdate])
 
   useEffect(()=>{
     setContent(todo.content)
-  },[])
+  },[setContent,todo.content])
 
   return (
     <>

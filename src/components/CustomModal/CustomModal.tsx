@@ -1,26 +1,25 @@
-import Modal from "react-modal";
-import React, {useCallback, useEffect, useState} from "react";
+import React, {useCallback, useState} from "react";
 import CustomButton from "../CustomButton/CustomButton";
-import {useQuery} from "react-query";
-import {getTodo} from "../../api/todos";
 import {useDispatch, useSelector} from "react-redux";
-import {falseModal, trueHaveNew, trueModal} from "../../redux/reducers/todosSlice";
-import {Container, GlobalStyle, Linker} from "../../pages/Detail/style";
+import {TodosState, falseModal} from "../../redux/reducers/todosSlice";
 import ReadTodo from "../ReadTodo/ReadTodo";
 import UpdateTodo from "../UpdateTodo/UpdateTodo";
-import {StyledH4, StyledModal} from "./style";
+import { Container, GlobalStyle, Linker, StyledModal} from "./style";
+import { RootState } from './../../type/local';
 
-const CustomModal = ({name, size, theme, border, type}) => {
+interface CustomModalProps {
+  type?:string;
+}
+
+const CustomModal = ({type}:CustomModalProps) => {
   const dispatch=useDispatch()
   const [onUpdate,setOnUpdate]=useState(false)
-  const { viewMode,modalOn,todo } = useSelector(state => state.todos);
-  const onModal=useCallback(()=>{
-    dispatch(trueModal())
-  },[])
+  const { modalOn,todo }:{modalOn:boolean,todo:TodosState["todo"]} = useSelector((state:RootState) => state.todos);
+
   const offModal=useCallback(()=>{
     dispatch(falseModal())
     setOnUpdate(false)
-  },[])
+  },[dispatch,setOnUpdate])
   const toggleUpdate = useCallback(()=>{
     setOnUpdate(prev => !prev)
   },[])
@@ -28,7 +27,6 @@ const CustomModal = ({name, size, theme, border, type}) => {
   return (
     <>
       {type === 'type1' ?  (<>
-        <StyledH4 onClick={onModal}>{name}</StyledH4>
         <StyledModal
           isOpen={modalOn}
           shouldCloseOnOverlayClick={false}
@@ -54,7 +52,7 @@ const CustomModal = ({name, size, theme, border, type}) => {
               </Linker>
               { !onUpdate ?
                 <ReadTodo todo={todo} toggleUpdate={toggleUpdate}/>:
-                <UpdateTodo todo={todo} toggleUpdate={toggleUpdate}/>}
+                <UpdateTodo toggleUpdate={toggleUpdate}/>}
           </Container>
         </StyledModal></>):(<></>)}
     </>

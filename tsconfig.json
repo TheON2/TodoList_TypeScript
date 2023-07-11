@@ -3,10 +3,11 @@
     "target": "es2020",
     "noEmit": true,
     "jsx": "react-jsx",
-    "module": "commonjs",
+    "module": "es2020",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
+    "moduleResolution": "node",
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]

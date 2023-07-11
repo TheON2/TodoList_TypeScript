@@ -47,7 +47,11 @@ export const GlobalStyle = createGlobalStyle`
   }
 `;
 
-export const Button = styled.button`
+interface ButtonProps {
+  signup?: boolean;
+}
+
+export const Button = styled.button<ButtonProps>`
   border-radius: 20px;
   border: none;
   //background-color: #FF4B2B;

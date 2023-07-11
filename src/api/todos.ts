@@ -1,7 +1,15 @@
 import api from "../axios/api";
 
+interface Todo {
+  title:string;
+  content:string;
+  done: boolean;
+  id: string;
+  writerEmail:string|null;
+}
+
 //todos
-const addTodo = async (newTodo) => {
+const addTodo = async (newTodo:Todo) => {
   await api.post(`/todos`, newTodo);
 };
 
@@ -10,42 +18,42 @@ const getTodos = async () => {
   return response.data;
 };
 
-const getTodo = async (todoId) => {
+const getTodo = async (todoId:string) => {
   const response = await api.get(`/todos/todo/${todoId}`);
   return response.data;
 };
 
-const getTodosWorking = async (page) => {
+const getTodosWorking = async (page:number) => {
   const response = await api.post(`/todos/working/infinite`, {page:page});
   return response.data;
 };
 
-const getTodosDone = async (page) => {
+const getTodosDone = async(page:number) => {
   const response = await api.post(`/todos/done/infinite`,{page:page});
   return response.data;
 };
 
-const getTodosWorkingPaging = async (page) => {
+const getTodosWorkingPaging = async (page:number) => {
   const response = await api.post(`/todos/working/pagination`, {page:page});
   return response.data;
 };
 
-const getTodosDonePaging = async (page) => {
+const getTodosDonePaging = async (page:number) => {
   const response = await api.post(`/todos/done/pagination`,{page:page});
   return response.data;
 };
 
-const updateDoneTodo = async (todo) => {
+const updateDoneTodo = async (todo:Todo) => {
   const response = await api.patch(`/todos/${todo.id}/done`, {done: !(todo.done)});
   return response.data;
 };
 
-const updateTodo = async (sendData) => {
+const updateTodo = async (sendData:Todo) => {
   const response = await api.patch(`/todos/${sendData.id}/content`, {content: sendData.content});
   return response.data;
 };
 
-const deleteTodo = async (todoId) => {
+const deleteTodo = async (todoId:string) => {
   const response = await api.delete(`/todos/${todoId}`);
   return response.data;
 };

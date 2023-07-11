@@ -47,10 +47,13 @@ export const GlobalStyle = createGlobalStyle`
   }
 `;
 
-export const Button = styled.button`
+interface ButtonProps {
+  signup?: boolean;
+}
+
+export const Button = styled.button<ButtonProps>`
   border-radius: 20px;
   border: none;
-  //background-color: #FF4B2B;
   background-color: ${props => props.signup === true ? '#FF4B2B' : 'gray'};
   color: #FFFFFF;
   font-size: 12px;
@@ -59,7 +62,6 @@ export const Button = styled.button`
   letter-spacing: 1px;
   text-transform: uppercase;
   transition: transform 80ms ease-in;
-
 
   &:active {
     transform: scale(0.95);
@@ -73,6 +75,7 @@ export const Button = styled.button`
     background-color: transparent;
     border-color: #FFFFFF;
   }
+  
   &:hover {
     cursor:${props => props.signup === true ? 'pointer' : ''};
   }

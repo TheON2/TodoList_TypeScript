@@ -1,20 +1,21 @@
-import {useCallback} from "react";
+import {FormEvent, useCallback} from "react";
 import useInput from "../../hooks/useInput";
 import {v4 as uuidv4} from 'uuid'
 import {addTodo} from "../../api/todos";
 import useMutate from "../../hooks/useMutate";
 import CustomButton from "../CustomButton/CustomButton";
 import {Form, Input, InputContent, InputGroup, Label} from "./style";
-import {resetTodos, trueHaveNew} from "../../redux/reducers/todosSlice";
+import { trueHaveNew} from "../../redux/reducers/todosSlice";
 import {useSelector} from "react-redux";
+import { RootState } from './../../type/local';
 
 const AddForm = () => {
   const [title,onChangeTitle,setTitle] = useInput('')
   const [content,onChangeContent,setContent] = useInput('')
   const mutation = useMutate(addTodo,'todos',trueHaveNew)
-  const {email} = useSelector(state=>state.user.user)
+  const {email} = useSelector((state:RootState)=>state.user.user)
 
-  const add_Todo=useCallback((e)=>{
+  const add_Todo=useCallback((e:FormEvent<HTMLFormElement>)=>{
     if(title===''){
       alert('제목을 입력하세용')
       return
