@@ -1,6 +1,25 @@
-import { createSlice } from '@reduxjs/toolkit'
+import {createSlice, PayloadAction} from '@reduxjs/toolkit'
 
-const initialState = {
+export interface UserState {
+  user:{
+    email:string|null,
+    nickName:string|null,
+    isLogged:boolean,
+    token:string|null|undefined,
+    logInLoading:boolean,
+    logInDone:boolean,
+    logInError:boolean,
+    imageUrl:string|null,
+    profileContent:string|null,
+  }
+}
+
+interface UserResponse {
+  userResponse: Omit<UserState['user'], 'isLogged'|'token'> & {profileUrl : string },
+  token:string,
+}
+
+const initialState:UserState = {
   user:{
     email:null,
     nickName:null,
@@ -18,7 +37,7 @@ const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    loginUser: (state, action) => {
+    loginUser: (state:UserState, action:PayloadAction<UserResponse>) => {
       state.user.email=action.payload.userResponse.email
       state.user.nickName=action.payload.userResponse.nickName
       state.user.profileContent=action.payload.userResponse.profileContent
@@ -27,19 +46,18 @@ const userSlice = createSlice({
       localStorage.setItem('token', action.payload.token);
       state.user.isLogged=true
     },
-    authUser: (state, action) => {
+    authUser: (state:UserState, action) => {
       state.user.email=action.payload.userResponse.email
       state.user.nickName=action.payload.userResponse.nickName
       state.user.profileContent=action.payload.userResponse.profileContent
       state.user.imageUrl=action.payload.userResponse.profileUrl
       state.user.isLogged=true
     },
-    getProfileImage: (state, action) => {
+    getProfileImage: (state:UserState, action) => {
       state.user.imageUrl=action.payload
     },
-    unauthUser: (state, action) => {
+    unauthUser: (state:UserState, action) => {
       state.user.email=null
-      state.user.name=null
       state.user.isLogged=false
       state.user.profileContent=null
       state.user.imageUrl=null
@@ -47,9 +65,8 @@ const userSlice = createSlice({
       state.user.token=undefined
       localStorage.removeItem('token');
     },
-    logOutUser: (state, action) => {
+    logOutUser: (state:UserState, action) => {
       state.user.email=null
-      state.user.name=null
       state.user.token=null
       state.user.isLogged=false
       state.user.profileContent=null

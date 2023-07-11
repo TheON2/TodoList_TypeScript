@@ -8,14 +8,14 @@ import {
   GlobalStyle,
   Input, SignUpButton, SignUpContainer,
   SocialContainer
-} from "../SignUp/style";
+} from "./style";
 import React, {useCallback, useEffect} from "react";
 import {useNavigate} from "react-router-dom";
 import {FaFacebookF, FaGoogle} from "react-icons/fa6";
 import {RiKakaoTalkFill} from "react-icons/ri";
 import {SiNaver} from "react-icons/si";
 
-function SignUp() {
+const SignUp =()=> {
   const [email, onChangeEmail] = useInput('');
   const [nickName, onChangeNickname] = useInput('');
   const [password, onChangePassword] = useInput('');
