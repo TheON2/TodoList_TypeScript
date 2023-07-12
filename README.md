@@ -9,3 +9,21 @@
 - 필수 타이핑 및 인터페이스와 제네릭 선언
 - 기존 컴포넌트 구조 리팩토링
 - 필수 예외 처리 및 타이핑
+
+### tsconfig.json
+```tsx
+{
+  "compilerOptions": {
+    "target": "es2020",
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "module": "es2020",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "moduleResolution": "node",
+  },
+  "include": ["src"],
+  "references": [{ "path": "./tsconfig.node.json" }]
+}
+```
