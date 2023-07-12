@@ -27,58 +27,43 @@
   "references": [{ "path": "./tsconfig.node.json" }]
 }
 ```
-### 소스 계층구조
+## 프로젝트 구조
 
-  ├─api : 리액트쿼리 api
-  
-  ├─axios : axios 미들웨어
-  
-  ├─components :컴포넌트 폴더
-  
-  │  ├─AddForm : Todo 쓰기
-  
-  │  ├─CustomButton : 프로젝트 공용 커스텀버튼
-  
-  │  ├─CustomModal : 투두 디테일 모달
-  
-  │  ├─Loading : 로딩모션
-  
-  │  ├─Pagination : 투두리스트 페이지네이션 담당 컴포넌트
-  
-  │  ├─Profile : 메인페이지 프로필 컴포넌트
-  
-  │  ├─ReadTodo : Todo 상세페이지
-  
-  │  ├─TodoCard : TodoCard 컴포넌트
-  
-  │  ├─Todos : 메인화면 Todolist
-  
-  │  ├─TodosInfinite : 인피니트스크롤 적용 Todolist
-  
-  │  ├─TodosList : TodoCard를 조건에 따라 렌더링 하는 컴포넌트
-  
-  │  ├─TodosPagination : 페이지네이션 적용 Todolist
-  
-  │  └─UpdateTodo : 디테일 페이지에서 Todo 수정에 사용되는 컴포넌트
-  
-  ├─hooks : 커스텀훅 useInput / useMutate
-  
-  ├─layout
-  
-  │  ├─Header : 기본 레이아웃의 헤더
-  
-  │  └─Main : 기본 레이아웃의 바디
-  
-  ├─pages
-  
-  │  ├─Login : 로그인 페이지
-  
-  │  └─SignUp : 회원가입 페이지
-  
-  ├─redux
-  
-  │  ├─config : 리덕스 스토어
-  
-  │  └─reducers : 리덕스 리듀서
-  
-  └─type : 타입스크립트 타입정의
+- **api**
+    - 리액트쿼리 API 관련 코드
+
+- **axios**
+    - Axios 미들웨어
+
+- **components**: 프로젝트의 주요 컴포넌트들
+    - **AddForm**: Todo 작성 컴포넌트
+    - **CustomButton**: 전체 프로젝트에서 공통으로 사용되는 커스텀 버튼 컴포넌트
+    - **CustomModal**: Todo 상세 정보를 보여주는 모달 컴포넌트
+    - **Loading**: 로딩 애니메이션 컴포넌트
+    - **Pagination**: Todo 리스트의 페이지네이션 컴포넌트
+    - **Profile**: 메인 페이지의 프로필 컴포넌트
+    - **ReadTodo**: Todo의 상세 페이지 컴포넌트
+    - **TodoCard**: 각각의 Todo를 표시하는 카드 컴포넌트
+    - **Todos**: 메인 화면의 Todo 리스트 컴포넌트
+    - **TodosInfinite**: 무한 스크롤이 적용된 Todo 리스트 컴포넌트
+    - **TodosList**: 조건에 따라 TodoCard를 렌더링하는 컴포넌트
+    - **TodosPagination**: 페이지네이션이 적용된 Todo 리스트 컴포넌트
+    - **UpdateTodo**: Todo의 상세 페이지에서 Todo를 수정하는 컴포넌트
+
+- **hooks**: 사용자 정의 훅
+    - **useInput**
+    - **useMutate**
+
+- **layout**: 기본 레이아웃 컴포넌트
+    - **Header**: 헤더 컴포넌트
+    - **Main**: 메인 컴포넌트
+
+- **pages**: 각 페이지 컴포넌트
+    - **Login**: 로그인 페이지
+    - **SignUp**: 회원가입 페이지
+
+- **redux**: Redux 관련 코드
+    - **config**: 리덕스 스토어 설정
+    - **reducers**: 리덕스 리듀서
+
+- **type**: TypeScript 타입 정의
