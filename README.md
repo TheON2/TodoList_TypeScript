@@ -10,6 +10,25 @@
 - 기존 컴포넌트 구조 리팩토링
 - 필수 예외 처리 및 타이핑
 
+## 구현기능
+
+- **TodoList CRUD**
+- **TodoList 인피니트스크롤/페이지네이션**
+- **JWT기반 액세스토큰 리프레시토큰 로그인**
+- **패스포트기반 구글 / 네이버 / 카카오 소셜 회원가입/로그인**
+- **자신의 아이디를 기반으로한 TODO만 불러오기**
+
+## 사용기술
+
+### FRONT
+
+TYPESCRIPT REACT REDUX IMMER REDUX TOOLKIT REACT QUERY AXIOS AXIOS INTERCEPTOR STYLED-COMPONENT
+
+### BACK
+
+NODE EXPRESS NODEMON MONGOOSE MONGODB PASSPORT DOTENV MORGAN CORS JSONWEBTOKEN BCRYPT
+
+
 ### tsconfig.json
 ```tsx
 {
