@@ -1,5 +1,5 @@
 import TodoCard from "../TodoCard/TodoCard";
-import {ListContainer, TodoContainer} from "./style";
+import {TodoContainer} from "./style";
 import React, {useCallback, useEffect, useState} from "react";
 import useMutate from "../../hooks/useMutate";
 import { getTodosDonePaging, getTodosWorkingPaging} from "../../api/todos";
@@ -41,6 +41,7 @@ const TodosPagination = () => {
       dispatch(falseHaveNew())
     }
     if(hasMoreTodos){
+      if(viewMethod===2){
       if(viewMode===2){
         console.log(page)
         workingTodosPage_Mutate.mutate(0)
@@ -48,6 +49,7 @@ const TodosPagination = () => {
         doneTodosPage_Mutate.mutate(0)
       } 
     }
+  }
   },[viewMode,viewMethod,haveNew])
 
   return (

@@ -1,5 +1,5 @@
 import TodoCard from "../TodoCard/TodoCard";
-import {ListContainer, TodoContainer} from "./style";
+import { TodoContainer } from "./style";
 import React, {useCallback, useEffect, useState} from "react";
 import { getTodosDone, getTodosWorking} from "../../api/todos";
 import {
@@ -18,7 +18,7 @@ import { RootState } from "../../redux/config/configStore";
 
 const TodosInfinite = () => {
   const dispatch = useDispatch()
-  const { hasMoreTodos, todos: todolist, page: viewMode,viewMethod,haveNew } = 
+  const { hasMoreTodos, todos: todolist,viewMode,viewMethod,haveNew } = 
   useSelector((state:RootState) => state.todos);
   const [page,setPage] = useState(0)
   const [ref, inView] = useInView();
@@ -81,7 +81,7 @@ const TodosInfinite = () => {
           }
         }
       }
-    },[inView, hasMoreTodos, workingLoading, page]);
+    },[inView]);
 
   return (<>
       { viewMode === 2 && viewMethod === 1 &&
