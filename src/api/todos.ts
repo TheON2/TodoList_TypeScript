@@ -8,6 +8,11 @@ interface Todo {
   writerEmail:string|null;
 }
 
+interface SendData{
+  id:string|undefined;
+  content:string|undefined;
+}
+
 //todos
 const addTodo = async (newTodo:Todo) => {
   await api.post(`/todos`, newTodo);
@@ -48,7 +53,7 @@ const updateDoneTodo = async (todo:Todo) => {
   return response.data;
 };
 
-const updateTodo = async (sendData:Todo) => {
+const updateTodo = async (sendData:SendData) => {
   const response = await api.patch(`/todos/${sendData.id}/content`, {content: sendData.content});
   return response.data;
 };

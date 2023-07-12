@@ -4,6 +4,7 @@ import React, {useCallback, useEffect, useState} from "react";
 import useMutate from "../../hooks/useMutate";
 import { getTodosDone, getTodosDonePaging, getTodosWorking, getTodosWorkingPaging} from "../../api/todos";
 import {
+  Todo,
   changeViewMethod,
   changeViewMode, falseHaveNew,
    loadTodosDone,
@@ -11,17 +12,21 @@ import {
   resetTodos, trueHaveNew,
 } from "../../redux/reducers/todosSlice";
 import {useDispatch, useSelector} from "react-redux";
-import {debounce, throttle} from "lodash";
 import Pagination from "../Pagination/Pagination";
 import {useMutation, useQueryClient} from "react-query";
 import {useInView} from "react-intersection-observer";
-import {SiNaver} from "react-icons/si";
 import {IoInfinite} from "react-icons/io5";
 import {FaPager} from "react-icons/fa";
+import { RootState } from "../../redux/config/configStore";
 
-const TodosList = ({todos}) => {
+interface TodosListProps{
+  todos:Todo[]
+}
+
+const TodosList = ({todos}:TodosListProps) => {
   const dispatch = useDispatch()
-  const { hasMoreTodos, todos: todolist, page: pageNum,viewMode,viewMethod,haveNew } = useSelector(state => state.todos);
+  const { hasMoreTodos, todos: todolist, page: pageNum,viewMode,viewMethod,haveNew } = 
+  useSelector((state:RootState) => state.todos);
   const [page,setPage] = useState(0)
   const [ref, inView] = useInView();
 
@@ -46,20 +51,20 @@ const TodosList = ({todos}) => {
     dispatch(resetTodos())
     dispatch(trueHaveNew())
   },[])
-  const onChangeViewMode = useCallback((num)=>{
+  const onChangeViewMode = useCallback((num:number)=>{
     console.log(viewMode,num)
     if(viewMode!==num) {
       dispatch(changeViewMode(num))
       setPage(0)
     }
-  },[viewMode])
-  const onChangeViewMethod = useCallback((num)=>{
+  },[viewMode,dispatch])
+  const onChangeViewMethod = useCallback((num:number)=>{
     console.log(viewMethod,num)
     if(viewMethod!==num) {
       dispatch(changeViewMethod(num))
       setPage(0)
     }
-  },[viewMethod])
+  },[viewMethod,dispatch])
 
   useEffect(()=>{
     if(haveNew){
@@ -126,7 +131,7 @@ const TodosList = ({todos}) => {
           </span>
         </h2>
         <TodoContainer>
-          {todolist.map((todo) =>
+          {todolist?.map((todo) =>
             <TodoCard key={todo.id} todo={todo}/>
           )}
         </TodoContainer>
@@ -142,7 +147,7 @@ const TodosList = ({todos}) => {
         </h2>
         <Pagination page={pageNum}/>
         <TodoContainer>
-          {todolist.map((todo) =>
+          {todolist?.map((todo) =>
             <TodoCard key={todo.id} todo={todo}/>
           )}
         </TodoContainer>
@@ -156,7 +161,7 @@ const TodosList = ({todos}) => {
           </span>
         </h2>
         <TodoContainer>
-          {todolist.map((todo) =>
+          {todolist?.map((todo) =>
             <TodoCard key={todo.id} todo={todo}/>
           )}
         </TodoContainer>
@@ -172,7 +177,7 @@ const TodosList = ({todos}) => {
         </h2>
         <Pagination page={pageNum}/>
         <TodoContainer>
-          {todolist.map((todo) =>
+          {todolist?.map((todo) =>
             <TodoCard key={todo.id} todo={todo}/>
           )}
         </TodoContainer></>}
