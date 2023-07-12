@@ -5,19 +5,17 @@ import useMutate from "../../hooks/useMutate";
 import { getTodosDone, getTodosDonePaging, getTodosWorking, getTodosWorkingPaging} from "../../api/todos";
 import {
   Todo,
-  changeViewMethod,
   changeViewMode, falseHaveNew,
    loadTodosDone,
   loadTodosPaging, loadTodosWorking,
-  resetTodos, trueHaveNew,
 } from "../../redux/reducers/todosSlice";
 import {useDispatch, useSelector} from "react-redux";
-import Pagination from "../Pagination/Pagination";
 import {useMutation, useQueryClient} from "react-query";
 import {useInView} from "react-intersection-observer";
-import {IoInfinite} from "react-icons/io5";
-import {FaPager} from "react-icons/fa";
+ 
 import { RootState } from "../../redux/config/configStore";
+import TodosInfinite from "../TodosInfinite/TodosInfinite";
+import TodosPagination from "../TodosPagination/TodosPagination";
 
 interface TodosListProps{
   todos:Todo[]
@@ -25,7 +23,7 @@ interface TodosListProps{
 
 const TodosList = ({todos}:TodosListProps) => {
   const dispatch = useDispatch()
-  const { hasMoreTodos, todos: todolist, page: pageNum,viewMode,viewMethod,haveNew } = 
+  const { hasMoreTodos, page: viewMode,viewMethod,haveNew } = 
   useSelector((state:RootState) => state.todos);
   const [page,setPage] = useState(0)
   const [ref, inView] = useInView();
@@ -46,11 +44,6 @@ const TodosList = ({todos}:TodosListProps) => {
     },
   });
 
-  const onChangeAll = useCallback(()=>{
-    setPage(0)
-    dispatch(resetTodos())
-    dispatch(trueHaveNew())
-  },[])
   const onChangeViewMode = useCallback((num:number)=>{
     console.log(viewMode,num)
     if(viewMode!==num) {
@@ -58,13 +51,6 @@ const TodosList = ({todos}:TodosListProps) => {
       setPage(0)
     }
   },[viewMode,dispatch])
-  const onChangeViewMethod = useCallback((num:number)=>{
-    console.log(viewMethod,num)
-    if(viewMethod!==num) {
-      dispatch(changeViewMethod(num))
-      setPage(0)
-    }
-  },[viewMethod,dispatch])
 
   useEffect(()=>{
     if(haveNew){
@@ -122,65 +108,8 @@ const TodosList = ({todos}:TodosListProps) => {
           <TodoCard key={todo.id} todo={todo}/>
         )}
       </TodoContainer></>}
-      { viewMode === 2 && viewMethod === 1 &&
-      <>
-        <h2 className="list-title" style={{display: 'flex'}} onClick={onChangeAll}>Working.. 🔥
-          <span style={{marginRight: 'auto'}}>
-            <button onClick={(e)=>{e.stopPropagation();onChangeViewMethod(1)}}><IoInfinite size={'2em'} /></button>
-            <button onClick={(e)=>{e.stopPropagation();onChangeViewMethod(2)}}><FaPager size={'2em'} /></button>
-          </span>
-        </h2>
-        <TodoContainer>
-          {todolist?.map((todo) =>
-            <TodoCard key={todo.id} todo={todo}/>
-          )}
-        </TodoContainer>
-        <div id='bottom' style={{height:'200px'}} ref={hasMoreTodos && !workingLoading ? ref : undefined} />
-       </>}
-      { viewMode === 2 && viewMethod === 2 &&
-      <>
-        <h2 className="list-title" style={{display: 'flex'}} onClick={onChangeAll}>Working.. 🔥
-          <span style={{marginRight: 'auto'}}>
-            <button onClick={(e)=>{e.stopPropagation();onChangeViewMethod(1)}}><IoInfinite size={'2em'} /></button>
-            <button onClick={(e)=>{e.stopPropagation();onChangeViewMethod(2)}}><FaPager size={'2em'} /></button>
-          </span>
-        </h2>
-        <Pagination page={pageNum}/>
-        <TodoContainer>
-          {todolist?.map((todo) =>
-            <TodoCard key={todo.id} todo={todo}/>
-          )}
-        </TodoContainer>
-      </>}
-      { viewMode === 3 && viewMethod === 1 &&
-      <>
-        <h2 className="list-title" style={{display: 'flex'}} onClick={onChangeAll}>Done..! 🎉
-          <span style={{marginRight: 'auto'}}>
-            <button onClick={(e)=>{e.stopPropagation();onChangeViewMethod(1)}}><IoInfinite size={'2em'} /></button>
-            <button onClick={(e)=>{e.stopPropagation();onChangeViewMethod(2)}}><FaPager size={'2em'} /></button>
-          </span>
-        </h2>
-        <TodoContainer>
-          {todolist?.map((todo) =>
-            <TodoCard key={todo.id} todo={todo}/>
-          )}
-        </TodoContainer>
-        <div id='bottom' style={{height:'200px'}} ref={hasMoreTodos && !doneLoading ? ref : undefined} />
-      </>}
-      { viewMode === 3 && viewMethod === 2 &&
-      <>
-        <h2 className="list-title" style={{display: 'flex'}} onClick={onChangeAll}>Done..! 🎉
-          <span style={{marginRight: 'auto'}}>
-            <button onClick={(e)=>{e.stopPropagation();onChangeViewMethod(1)}}><IoInfinite size={'2em'} /></button>
-            <button onClick={(e)=>{e.stopPropagation();onChangeViewMethod(2)}}><FaPager size={'2em'} /></button>
-          </span>
-        </h2>
-        <Pagination page={pageNum}/>
-        <TodoContainer>
-          {todolist?.map((todo) =>
-            <TodoCard key={todo.id} todo={todo}/>
-          )}
-        </TodoContainer></>}
+      <TodosInfinite/>
+      <TodosPagination/>
     </ListContainer>
   )
 }
