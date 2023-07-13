@@ -1,4 +1,4 @@
-import { useCallback, useState, ChangeEvent } from 'react';
+import { useCallback, useState, ChangeEvent } from "react";
 
 const useInput = <T>(initialValue: T) => {
   const [value, setValue] = useState<T>(initialValue);

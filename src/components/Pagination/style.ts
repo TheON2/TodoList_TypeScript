@@ -1,7 +1,7 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
-export const MainColor = '#f0f0f0';
-export const SecondaryColor = '#1d1f20';
+export const MainColor = "#f0f0f0";
+export const SecondaryColor = "#1d1f20";
 
 export const Container = styled.div`
   display: flex;

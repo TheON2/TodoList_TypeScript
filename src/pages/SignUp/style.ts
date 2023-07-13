@@ -1,4 +1,4 @@
-import styled, {createGlobalStyle} from 'styled-components';
+import styled, { createGlobalStyle } from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`
   @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
@@ -54,8 +54,8 @@ interface ButtonProps {
 export const Button = styled.button<ButtonProps>`
   border-radius: 20px;
   border: none;
-  background-color: ${props => props.signup === true ? '#FF4B2B' : 'gray'};
-  color: #FFFFFF;
+  background-color: ${(props) => (props.signup === true ? "#FF4B2B" : "gray")};
+  color: #ffffff;
   font-size: 12px;
   font-weight: bold;
   padding: 12px 45px;
@@ -73,11 +73,11 @@ export const Button = styled.button<ButtonProps>`
 
   &.ghost {
     background-color: transparent;
-    border-color: #FFFFFF;
+    border-color: #ffffff;
   }
-  
+
   &:hover {
-    cursor:${props => props.signup === true ? 'pointer' : ''};
+    cursor: ${(props) => (props.signup === true ? "pointer" : "")};
   }
 `;
 
@@ -85,7 +85,7 @@ export const SignUpButton = styled.button`
   border-radius: 20px;
   border: none;
   background-color: skyblue;
-  color: #FFFFFF;
+  color: #ffffff;
   font-size: 12px;
   font-weight: bold;
   padding: 10px 25px;
@@ -103,12 +103,12 @@ export const SignUpButton = styled.button`
 
   &.ghost {
     background-color: transparent;
-    border-color: #FFFFFF;
+    border-color: #ffffff;
   }
 `;
 
 export const Form = styled.form`
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -127,12 +127,12 @@ export const Input = styled.input`
   width: 80%;
 `;
 
-
 export const Container = styled.div`
   background-color: #fff;
   border-radius: 10px;
-  box-shadow: 0 14px 28px rgba(0,0,0,0.25),
-  0 10px 10px rgba(0,0,0,0.22);
+  box-shadow:
+    0 14px 28px rgba(0, 0, 0, 0.25),
+    0 10px 10px rgba(0, 0, 0, 0.22);
   position: relative;
   overflow: hidden;
   width: 768px;
@@ -142,8 +142,8 @@ export const Container = styled.div`
 
 export const SocialContainer = styled.div`
   margin: 20px 0;
-  a{
-    border: 1px solid #DDDDDD;
+  a {
+    border: 1px solid #dddddd;
     border-radius: 50%;
     display: inline-flex;
     justify-content: center;

@@ -1,5 +1,4 @@
-import styled, {keyframes} from "styled-components";
-
+import styled, { keyframes } from "styled-components";
 
 export const Button = styled.button`
   background-color: teal;
@@ -21,9 +20,9 @@ export const Container = styled.div`
 `;
 
 export const Linker = styled.a`
-  display: flex; 
-  alignItems: center;
-  gap:10px;
+  display: flex;
+  alignitems: center;
+  gap: 10px;
   text-decoration: none;
   color: inherit;
 `;
@@ -41,15 +40,17 @@ const shimmer = keyframes`
 `;
 
 export const Logo = styled.div`
-  @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
-  font-family: 'Montserrat',sans-serif;
+  @import url("https://fonts.googleapis.com/css?family=Montserrat:400,800");
+  font-family: "Montserrat", sans-serif;
   text-align: center;
   box-sizing: border-box;
   font-weight: bold;
   font-size: 48px;
   margin: 0;
   color: #ffffff;
-  animation: ${move} 3s linear infinite, ${shimmer} 0.5s linear infinite;
+  animation:
+    ${move} 3s linear infinite,
+    ${shimmer} 0.5s linear infinite;
 `;
 
 const fadeOut = keyframes`
@@ -67,8 +68,8 @@ const rotate = keyframes`
 `;
 
 export const Logo2 = styled.div`
-  @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
-  font-family: 'Montserrat',sans-serif;
+  @import url("https://fonts.googleapis.com/css?family=Montserrat:400,800");
+  font-family: "Montserrat", sans-serif;
   text-align: center;
   box-sizing: border-box;
   font-weight: bold;
@@ -108,4 +109,3 @@ export const ProfilePicture2 = styled.div`
     filter: invert(1) brightness(2);
   }
 `;
-

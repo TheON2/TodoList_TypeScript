@@ -1,23 +1,23 @@
 import api from "../axios/api";
-import {UserResponse} from "../redux/reducers/userSlice";
+import { UserResponse } from "../redux/reducers/userSlice";
 
 interface User {
-  email:string|null,
-  nickName:string|null,
-  imageUrl:string|null,
-  profileContent:string|null,
-  profileUrl:string|null
+  email: string | null;
+  nickName: string | null;
+  imageUrl: string | null;
+  profileContent: string | null;
+  profileUrl: string | null;
 }
 
-interface NewUser{
-  email:string,
-  password:string,
-  nickName:string
+interface NewUser {
+  email: string;
+  password: string;
+  nickName: string;
 }
 
-interface LoginUser{
-  email:string,
-  password:string,
+interface LoginUser {
+  email: string;
+  password: string;
 }
 
 const addUser = async (newUser: NewUser): Promise<void> => {
@@ -48,8 +48,13 @@ const userLogOut = async (): Promise<void> => {
   await api.post(`/user/logout`);
 };
 
-const updateUser = async (sendData: { email: string; nickname: string }): Promise<void> => {
-  await api.patch(`/user/${sendData.email}/nickname`, { nickname: sendData.nickname });
+const updateUser = async (sendData: {
+  email: string;
+  nickname: string;
+}): Promise<void> => {
+  await api.patch(`/user/${sendData.email}/nickname`, {
+    nickname: sendData.nickname,
+  });
 };
 
 const deleteUser = async (userEmail: string): Promise<void> => {

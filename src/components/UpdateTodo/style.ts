@@ -1,6 +1,5 @@
 import styled from "styled-components";
 
-
 export const TextArea = styled.textarea`
   align-items: center;
   border: 1px #ddd;
@@ -41,6 +40,5 @@ export const DoneContainer = styled.div<DivProps>`
   display: flex;
   justify-content: space-between;
   padding: 0 20px;
-  background-color: ${props => props.done ? 'green' : 'red'};
+  background-color: ${(props) => (props.done ? "green" : "red")};
 `;
-

@@ -1,4 +1,4 @@
-import styled, { createGlobalStyle } from 'styled-components';
+import styled, { createGlobalStyle } from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`
   body {
@@ -26,13 +26,13 @@ export const Form = styled.form`
 export const LayOut = styled.div`
   margin: 0 auto;
   max-width: 1200px;
-  min-width: 800px
+  min-width: 800px;
 `;
 
 export const InputGroup = styled.div`
   align-items: center;
   display: flex;
-  gap: 20px
+  gap: 20px;
 `;
 
 export const Label = styled.label`
@@ -114,5 +114,3 @@ export const ListWrapper = styled.div`
   gap: 12px;
   padding-bottom: 20px;
 `;
-
-
